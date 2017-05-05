@@ -41,8 +41,8 @@ public class CalculadoraTeste extends TestCase{
    public void testaDivisao(){
       
        double num1 = 10.0;
-       double num2 = 3.00;
-       double retorno = 0.00;
+       double num2 = 2.00;
+       double retorno = 5.00;
        
        double resultado = new Calculadora().divisao(num1, num2);
        
@@ -62,5 +62,43 @@ public class CalculadoraTeste extends TestCase{
        assertEquals(retorno, resultado);
        
    }
-    
+   
+   @Test 
+   public void testaPorcentagem(){
+       
+       double num1 = 100.0;
+       double num2 = 20.0;
+       double retorno = 20.0;
+       
+       double resultado = new Calculadora().porcentagem(num1, num2);
+       
+       assertEquals(retorno, resultado);
+       
+   }
+   
+   @Test
+   public void testaPotencia(){
+       
+       double num1 = 10.0;
+       double num2 = 2.0;
+       double retorno = 100.0;
+
+       double resultado = new Calculadora().potencia(num1, num2);
+       
+       assertEquals(retorno, resultado);
+       
+   }
+   
+   @Test
+   public void testaRaiz(){
+       
+       double num1 = 49.0;
+       double retorno = 7.0;
+       
+       double resultado = new Calculadora().raiz(num1);
+       
+       assertEquals(retorno, resultado);
+       
+   }
+   
 }

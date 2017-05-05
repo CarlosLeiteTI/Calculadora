@@ -38,11 +38,23 @@ public class CalculadoraView extends javax.swing.JDialog {
         jlbTitulo.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         jlbTitulo.setText("Calculadora");
 
+        jtxNum1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jtxNum1KeyPressed(evt);
+            }
+        });
+
+        jtxNum2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jtxNum2KeyPressed(evt);
+            }
+        });
+
         jlbNum1.setText("Número 1");
 
         jlbNum2.setText("Número 2");
 
-        jcbOperacao.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Soma", "Subtração", "Divisão", "Multiplicação" }));
+        jcbOperacao.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Soma", "Subtração", "Divisão", "Multiplicação", "Porcentagem", "Potência", "Raiz" }));
 
         jbtExecutar.setText("Executar");
         jbtExecutar.addActionListener(new java.awt.event.ActionListener() {
@@ -153,10 +165,15 @@ public class CalculadoraView extends javax.swing.JDialog {
     
         double resultado;
         String item; 
-        item = (String) jcbOperacao.getSelectedItem();
+        item = (String) jcbOperacao.getSelectedItem(); 
+        double num1 = 0.0;
+        double num2 = 0.0;
+                
+        num1 = Double.parseDouble(jtxNum1.getText());
         
-        double num1 = Double.parseDouble(jtxNum1.getText());
-        double num2 = Double.parseDouble(jtxNum2.getText());
+        if (jtxNum2.getText() == ""){
+            num2 = Double.parseDouble(jtxNum2.getText());
+        }
         
         if (item == "Soma"){
             resultado = calculadora.soma(num1, num2);
@@ -167,9 +184,18 @@ public class CalculadoraView extends javax.swing.JDialog {
         } else if (item == "Multiplicação"){
             resultado = calculadora.multiplicacao(num1, num2);
             JOptionPane.showMessageDialog(null, "O resultado da multiplicação é " + resultado, "Mensagem", JOptionPane.OK_OPTION);
-        } else {
+        } else if (item == "Divisão"){
             resultado = calculadora.divisao(num1, num2);
             JOptionPane.showMessageDialog(null, "O resultado da divisão é " + resultado, "Mensagem", JOptionPane.OK_OPTION);
+        } else if (item == "Porcentagem"){
+            resultado = calculadora.porcentagem(num1, num2);
+            JOptionPane.showMessageDialog(null, "O resultado da porcentagem é " + resultado, "Mensagem", JOptionPane.OK_OPTION);
+        } else if (item == "Potência") {
+            resultado = calculadora.potencia(num1, num2);
+            JOptionPane.showMessageDialog(null, "O resultado da potência é " + resultado, "Mensagem", JOptionPane.OK_OPTION);
+        } else {
+            resultado = calculadora.raiz(num1);
+            JOptionPane.showMessageDialog(null, "O resultado da raiz é " + resultado, "Mensagem", JOptionPane.OK_OPTION);
         }
                 
     }//GEN-LAST:event_jbtExecutarActionPerformed
@@ -187,6 +213,21 @@ public class CalculadoraView extends javax.swing.JDialog {
         this.dispose();
         
     }//GEN-LAST:event_jbtSairActionPerformed
+
+    private void jtxNum1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtxNum1KeyPressed
+       
+        if (evt.getKeyCode() == 10){
+            jtxNum2.requestFocus();
+        }
+    }//GEN-LAST:event_jtxNum1KeyPressed
+
+    private void jtxNum2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtxNum2KeyPressed
+        
+        if (evt.getKeyCode() == 10){
+            jtxNum1.requestFocus();
+        }
+        
+    }//GEN-LAST:event_jtxNum2KeyPressed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
